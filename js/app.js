@@ -7,7 +7,4 @@ function mostrarFlores() {
             flor.style.transform = "translateY(0)";
         }, index * 150);
     });
-}function mostrarFlores() {
-    const jardin = document.getElementById("jardin");
-    jardin.classList.remove("oculto");
 }
