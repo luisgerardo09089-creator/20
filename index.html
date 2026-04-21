@@ -46,12 +46,16 @@
             background-color: #c2185b;
         }
 
-        #ramo {
+        #contenedor {
             display: none;
+            text-align: center;
+        }
+
+        #ramo {
             position: relative;
             width: 350px;
             height: 350px;
-            margin-top: 20px;
+            margin: 0 auto;
         }
 
         .tulipan {
@@ -72,7 +76,6 @@
             }
         }
 
-        /* Lazo del ramo */
         .lazo {
             position: absolute;
             bottom: 10px;
@@ -80,6 +83,16 @@
             transform: translateX(-50%);
             font-size: 60px;
             animation: aparecer 0.5s ease-in 2.1s forwards;
+            opacity: 0;
+        }
+
+        #imagenAbajo {
+            width: 300px;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 4px solid white;
+            animation: aparecer 0.5s ease-in 2.3s forwards;
             opacity: 0;
         }
 
@@ -97,20 +110,23 @@
     <h1>Ramo de 20 Tulipanes</h1>
     <button id="btnRamo">Armar ramo de tulipanes</button>
     
-    <div id="ramo"></div>
-    <p id="mensaje"></p>
+    <div id="contenedor">
+        <div id="ramo"></div>
+        <img id="imagenAbajo" src="https://images.unsplash.com/photo-1526047932273-341f2a8011f4?w=400" alt="Campo de tulipanes">
+        <p id="mensaje"></p>
+    </div>
 
     <script>
         const btnRamo = document.getElementById('btnRamo');
+        const contenedor = document.getElementById('contenedor');
         const ramo = document.getElementById('ramo');
         const mensaje = document.getElementById('mensaje');
 
         btnRamo.addEventListener('click', function() {
             ramo.innerHTML = '';
-            ramo.style.display = 'block';
+            contenedor.style.display = 'block';
             mensaje.textContent = '';
             
-            // Coordenadas para acomodar los 20 tulipanes en forma de ramo circular
             const posiciones = [
                 {x: 175, y: 50}, {x: 130, y: 60}, {x: 220, y: 60},
                 {x: 95, y: 85}, {x: 175, y: 85}, {x: 255, y: 85},
@@ -120,7 +136,6 @@
                 {x: 175, y: 230}
             ];
 
-            // Creamos los 20 tulipanes
             for (let i = 0; i < 20; i++) {
                 const tulipan = document.createElement('div');
                 tulipan.className = 'tulipan';
@@ -131,7 +146,6 @@
                 ramo.appendChild(tulipan);
             }
 
-            // Agregamos el lazo al final
             const lazo = document.createElement('div');
             lazo.className = 'lazo';
             lazo.textContent = '🎀';
@@ -139,7 +153,7 @@
             
             setTimeout(() => {
                 mensaje.textContent = '¡Tu ramo de 20 tulipanes está listo!';
-            }, 2100);
+            }, 2500);
             
             btnRamo.textContent = 'Armar otro ramo';
         });
