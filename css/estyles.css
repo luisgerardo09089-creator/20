@@ -4,6 +4,7 @@ body {
     font-family: Arial;
 }
 
+/* Botón */
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -11,10 +12,7 @@ button {
     cursor: pointer;
 }
 
-.oculto {
-    display: none;
-}
-
+/* Jardín visible SIEMPRE */
 .jardin {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -28,7 +26,12 @@ button {
     height: 80px;
     position: relative;
     margin: auto;
+
+    opacity: 0;
+    transform: translateY(50px);
+
     animation: mover 3s infinite ease-in-out;
+    transition: all 0.5s;
 }
 
 /* Centro */
@@ -61,9 +64,9 @@ button {
         0 25px pink;
 }
 
-/* Animación tipo viento */
+/* Animación */
 @keyframes mover {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(10deg); }
-    100% { transform: rotate(0deg); }
+    0% { transform: translateY(50px) rotate(0deg); }
+    50% { transform: translateY(50px) rotate(10deg); }
+    100% { transform: translateY(50px) rotate(0deg); }
 }
