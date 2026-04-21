@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jardín de 20 Flores</title>
+    <title>Ramo de Tulipanes</title>
     <style>
         * {
             margin: 0;
@@ -13,22 +13,24 @@
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #e8f5e9;
+            background-color: #fce4ec;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 40px 20px;
         }
 
         h1 {
-            color: #2e7d32;
+            color: #c2185b;
             margin-bottom: 24px;
             font-size: 32px;
+            text-align: center;
         }
 
-        #btnFlores {
-            background-color: #4caf50;
+        #btnRamo {
+            background-color: #e91e63;
             color: white;
             border: none;
             border-radius: 8px;
@@ -40,81 +42,106 @@
             transition: background-color 0.2s ease;
         }
 
-        #btnFlores:hover {
-            background-color: #388e3c;
+        #btnRamo:hover {
+            background-color: #c2185b;
         }
 
-        #btnFlores:disabled {
-            background-color: #a5d6a7;
-            cursor: not-allowed;
-        }
-
-        #jardin {
+        #ramo {
             display: none;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            max-width: 800px;
+            position: relative;
+            width: 350px;
+            height: 350px;
+            margin-top: 20px;
         }
 
-        .flor {
-            font-size: 50px;
-            animation: aparecer 0.5s ease-in;
+        .tulipan {
+            position: absolute;
+            font-size: 45px;
+            animation: aparecer 0.4s ease-in forwards;
+            opacity: 0;
         }
 
         @keyframes aparecer {
             from {
                 opacity: 0;
-                transform: scale(0);
+                transform: scale(0) translateY(20px);
             }
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1) translateY(0);
             }
         }
 
-        #contador {
+        /* Lazo del ramo */
+        .lazo {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            animation: aparecer 0.5s ease-in 2.1s forwards;
+            opacity: 0;
+        }
+
+        #mensaje {
             margin-top: 20px;
             font-size: 18px;
-            color: #1b5e20;
+            color: #880e4f;
             font-weight: 500;
+            height: 25px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Mi Jardín Virtual</h1>
-    <button id="btnFlores">Mostrar 20 flores</button>
+    <h1>Ramo de 20 Tulipanes</h1>
+    <button id="btnRamo">Armar ramo de tulipanes</button>
     
-    <div id="jardin"></div>
-    <p id="contador"></p>
+    <div id="ramo"></div>
+    <p id="mensaje"></p>
 
     <script>
-        const btnFlores = document.getElementById('btnFlores');
-        const jardin = document.getElementById('jardin');
-        const contador = document.getElementById('contador');
-        
-        // Array de emojis de flores diferentes
-        const emojisFlores = ['🌸', '🌺', '🌻', '🌷', '🌹', '🪻', '🌼', '💐', '🏵️', '🪷'];
+        const btnRamo = document.getElementById('btnRamo');
+        const ramo = document.getElementById('ramo');
+        const mensaje = document.getElementById('mensaje');
 
-        btnFlores.addEventListener('click', function() {
-            // Limpiamos por si ya había flores
-            jardin.innerHTML = '';
-            jardin.style.display = 'flex';
+        btnRamo.addEventListener('click', function() {
+            ramo.innerHTML = '';
+            ramo.style.display = 'block';
+            mensaje.textContent = '';
             
-            // Creamos 20 flores
+            // Coordenadas para acomodar los 20 tulipanes en forma de ramo circular
+            const posiciones = [
+                {x: 175, y: 50}, {x: 130, y: 60}, {x: 220, y: 60},
+                {x: 95, y: 85}, {x: 175, y: 85}, {x: 255, y: 85},
+                {x: 70, y: 120}, {x: 140, y: 120}, {x: 210, y: 120}, {x: 280, y: 120},
+                {x: 60, y: 160}, {x: 120, y: 155}, {x: 175, y: 150}, {x: 230, y: 155}, {x: 290, y: 160},
+                {x: 90, y: 200}, {x: 150, y: 195}, {x: 200, y: 195}, {x: 260, y: 200},
+                {x: 175, y: 230}
+            ];
+
+            // Creamos los 20 tulipanes
             for (let i = 0; i < 20; i++) {
-                const flor = document.createElement('div');
-                flor.className = 'flor';
-                // Elegimos una flor random del array
-                flor.textContent = emojisFlores[Math.floor(Math.random() * emojisFlores.length)];
-                // Delay para que aparezcan una por una
-                flor.style.animationDelay = `${i * 0.1}s`;
-                jardin.appendChild(flor);
+                const tulipan = document.createElement('div');
+                tulipan.className = 'tulipan';
+                tulipan.textContent = '🌷';
+                tulipan.style.left = `${posiciones[i].x - 22}px`;
+                tulipan.style.top = `${posiciones[i].y}px`;
+                tulipan.style.animationDelay = `${i * 0.1}s`;
+                ramo.appendChild(tulipan);
             }
+
+            // Agregamos el lazo al final
+            const lazo = document.createElement('div');
+            lazo.className = 'lazo';
+            lazo.textContent = '🎀';
+            ramo.appendChild(lazo);
             
-            contador.textContent = '¡Se plantaron 20 flores!';
-            btnFlores.textContent = 'Plantar de nuevo';
+            setTimeout(() => {
+                mensaje.textContent = '¡Tu ramo de 20 tulipanes está listo!';
+            }, 2100);
+            
+            btnRamo.textContent = 'Armar otro ramo';
         });
     </script>
 </body>
